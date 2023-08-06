@@ -1,14 +1,18 @@
 var splash
 var gameState = "wait"
-var playbutton, soundonbutton, soundoffbutton, level1bgimg, level1bg, level2bgimg, level2bg
+var playbutton,playerimg, soundonbutton, soundoffbutton, level1bgimg, level1bg, level2bgimg, level2bg
 var health = 0
 var maxHealth = 400
+var playerimg1
 var score1 = 0
 
 
 function preload() {
     splash = loadImage("assets/trouble.gif")
     level1bgimg = loadImage("level1bg.jpg")
+    playerimg=loadAnimation("assets/player/player1.png","assets/player/player2.png","assets/player/player3.png","assets/player/player4.png")
+    playerimg1=loadImage("assets/player/player1.png")
+
 }
 
 
@@ -33,7 +37,10 @@ function setup() {
     level1bg.visible = false
 
 
-    player=createSprite(100,height-100,50,50)
+    player=createSprite(100,height-150,50,50)
+    // player.addImage(playerimg1)
+    player.addAnimation(playerimg)
+    player.scale=0.8
     player.visible=false
 
 
@@ -53,6 +60,8 @@ function draw() {
     if (gameState == "level1") {
         background(level1bgimg)
         level1bg.visible = true
+        // player.visible=true
+
         level1bg.velocityX += -2
         if (level1bg.x <= 0) {
             level1bg.x =level1bg.width / 2
